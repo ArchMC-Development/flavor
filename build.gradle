@@ -58,7 +58,7 @@ artifactory {
 
     publish {
         repository {
-            repoKey = "${artifactory_release_local}"
+            repoKey = "${artifactory_release}"
             username = "${artifactory_user}"
             password = "${artifactory_password}"
             maven = true
