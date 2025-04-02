@@ -7,6 +7,7 @@ import org.reflections.scanners.MethodAnnotationsScanner
 import org.reflections.scanners.Scanners
 import org.reflections.scanners.SubTypesScanner
 import org.reflections.scanners.TypeAnnotationsScanner
+import org.reflections.util.ClasspathHelper
 import org.reflections.util.ConfigurationBuilder
 import org.reflections.util.QueryFunction
 import java.lang.reflect.Method
@@ -28,6 +29,13 @@ class PackageIndexer(
                     options.`package` ?: this.clazz.java.`package`.name,
                     this.clazz.java.classLoader
                 )
+                .apply {
+                    options.additionalPackages.onEach {
+                        addUrls(
+                            ClasspathHelper.forPackage(it, clazz.java.classLoader)
+                        )
+                    }
+                }
                 .addScanners(
                     MethodAnnotationsScanner(),
                     TypeAnnotationsScanner(),

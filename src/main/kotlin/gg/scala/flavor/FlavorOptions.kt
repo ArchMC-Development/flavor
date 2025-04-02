@@ -10,5 +10,6 @@ data class FlavorOptions
 @JvmOverloads
 constructor(
     val logger: Logger = Logger.getAnonymousLogger(),
-    val `package`: String? = null
+    val `package`: String? = null,
+    val additionalPackages: List<String> = listOf()
 )
